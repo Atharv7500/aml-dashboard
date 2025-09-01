@@ -268,4 +268,7 @@ if __name__ == '__main__':
     # Start FastAPI in thread
     Thread(target=run_fastapi).start()
     # Run Dash
-    app.run_server(debug=True, host='0.0.0.0', port=8050)
+    port = int(os.environ.get('PORT', 8050))
+    print(f"Running on port {port}")
+    app.run_server(debug=True, host='0.0.0.0', port=port)
+    
