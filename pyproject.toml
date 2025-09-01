@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "aml-dashboard"
+version = "0.1.0"
+description = "AML Dashboard Prototype"
+authors = ["Atharv <atharv@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+dash = "*"
+pandas = "*"
+numpy = "*"
+plotly = "*"
+scikit-learn = "*"
+xgboost = "*"
+lightgbm = "*"
+imbalanced-learn = "*"
+networkx = "*"
+torch = "*"
+torch-geometric = "*"
+fastapi = "*"
+uvicorn = "*"
+mlflow = "*"
+prometheus-client = "*"
+sentry-sdk = "*"
+faker = "*"
+psycopg2-binary = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
