@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
-from imbalanced_learn.over_sampling import SMOTE
+from imblearn.over_sampling import SMOTE
 import networkx as nx
 import torch
 import torch.nn as nn
