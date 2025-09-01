@@ -39,31 +39,23 @@ from threading import Thread
 # Initialize Sentry for error tracking
 sentry_sdk.init(dsn="https://example@example.ingest.sentry.io/example")  # Replace with real DSN for production
 
-# Initialize Prometheus metrics
-alert_counter = Counter('aml_alerts_total', 'Total AML alerts generated')
-
-# FastAPI integration (simple endpoint for API demo)
-fastapi_app = FastAPI()
-
-@fastapi_app.get("/api/alerts")
-def get_alerts():
-    return {"alerts": mock_data.to_dict('records')}
+# Prometheus and FastAPI removed for memory optimization
 
 # Mock data generation (simulating ETL with pandas) with synthetic data
 fake = Faker()
 np.random.seed(42)
 mock_data = pd.DataFrame({
-    'transaction_id': range(1000),
-    'amount': np.random.uniform(100, 10000, 1000),
-    'currency': np.random.choice(['USD', 'EUR', 'BTC'], 1000),
-    'risk_score': np.random.uniform(0, 1, 1000),
-    'alert': np.random.choice([0, 1], 1000, p=[0.8, 0.2]),  # Imbalanced for demo
-    'customer_id': np.random.randint(1, 200, 1000),
-    'time_of_day': np.random.randint(0, 24, 1000),
-    'customer_name': [fake.name() for _ in range(1000)],
-    'transaction_description': [fake.sentence() for _ in range(1000)],
-    'location': [fake.city() for _ in range(1000)],
-    'date': [fake.date_this_year() for _ in range(1000)]
+    'transaction_id': range(500),
+    'amount': np.random.uniform(100, 10000, 500),
+    'currency': np.random.choice(['USD', 'EUR', 'BTC'], 500),
+    'risk_score': np.random.uniform(0, 1, 500),
+    'alert': np.random.choice([0, 1], 500, p=[0.8, 0.2]),  # Imbalanced for demo
+    'customer_id': np.random.randint(1, 200, 500),
+    'time_of_day': np.random.randint(0, 24, 500),
+    'customer_name': [fake.name() for _ in range(500)],
+    'transaction_description': [fake.sentence() for _ in range(500)],
+    'location': [fake.city() for _ in range(500)],
+    'date': [fake.date_this_year() for _ in range(500)]
 })
 
 # Feature engineering (tabular features)
@@ -143,12 +135,7 @@ xgb_model.fit(X_train, y_train)
 lgb_model = LGBMClassifier(random_state=42)
 lgb_model.fit(X_train, y_train)
 
-# Log experiments with MLflow
-mlflow.set_experiment("AML_Models")
-with mlflow.start_run():
-    mlflow.log_param("model", "RandomForest")
-    mlflow.log_metric("accuracy", rf_model.score(X_test, y_test))
-    mlflow.sklearn.log_model(rf_model, "model")
+# MLflow logging removed for memory optimization
 
 # Graph construction with NetworkX (prototyping)
 G = nx.Graph()
@@ -270,5 +257,5 @@ if __name__ == '__main__':
     # Run Dash
     port = int(os.environ.get('PORT', 8050))
     print(f"Running on port {port}")
-    app.run_server(debug=True, host='0.0.0.0', port=port)
+    app.run_server(debug=False, host='0.0.0.0', port=port)
     
