@@ -15,3 +15,5 @@ mlflow
 prometheus-client
 grafana-api
 sentry-sdk
+faker
+psycopg2-binary
